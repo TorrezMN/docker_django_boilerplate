@@ -12,3 +12,4 @@ python mange.py collectstatic --no-input
 gunicorn dj_project.wsgi:application --bind 0.0.0.0:8000
 
 
+

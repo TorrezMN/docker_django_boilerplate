@@ -20,6 +20,8 @@ services:
       - "80:80"
     depends_on:
       - django_gunicorn
+    restart: on-failure
+
 
 volumes:
   static:
