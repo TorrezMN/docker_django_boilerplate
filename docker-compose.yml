@@ -4,7 +4,6 @@ services:
   django_gunicorn:
     volumes:
       - static:/static
-      - ./src/:/usr/src/app/
 
     env_file:
       - .env
