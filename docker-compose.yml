@@ -4,7 +4,6 @@ services:
   django_gunicorn:
     volumes:
       - static:/static
-
     env_file:
       - .env
     build:
@@ -15,6 +14,7 @@ services:
       - db
     networks:
       - nginx_network
+    restart: on-failure
 
   nginx:
     build: ./nginx
@@ -26,6 +26,7 @@ services:
       - django_gunicorn
     networks:
       - nginx_network
+    restart: on-failure
 
   db:
     image: postgres:12.0-alpine
@@ -33,17 +34,17 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     command: -p 5433
-    expose:
-      - "5433"
     ports:
       - '5433:5433'
     networks:
       - nginx_network
     environment:
-      - POSTGRES_USER=username
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=default_db
-
+      - POSTGRES_ENGINE=django.db.backends.postgresql
+      - POSTGRES_DATABASE=hello_django_dev
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5433
 
 
 
