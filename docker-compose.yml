@@ -39,6 +39,10 @@ services:
       - '5433:5433'
     networks:
       - nginx_network
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=default_db
 
 
 
